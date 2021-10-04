@@ -13,10 +13,8 @@ import {
     DISMISS_PENDING_PARTICIPANT,
     ENABLE_MODERATION,
     LOCAL_PARTICIPANT_APPROVED,
-    LOCAL_PARTICIPANT_REJECTED,
     PARTICIPANT_APPROVED,
-    PARTICIPANT_PENDING_AUDIO,
-    PARTICIPANT_REJECTED
+    PARTICIPANT_PENDING_AUDIO
 } from './actionTypes';
 import { MEDIA_TYPE_TO_PENDING_STORE_KEY } from './constants';
 
@@ -100,16 +98,6 @@ ReducerRegistry.register('features/av-moderation', (state = initialState, action
     case LOCAL_PARTICIPANT_APPROVED: {
         const newState = action.mediaType === MEDIA_TYPE.AUDIO
             ? { audioUnmuteApproved: true } : { videoUnmuteApproved: true };
-
-        return {
-            ...state,
-            ...newState
-        };
-    }
-
-    case LOCAL_PARTICIPANT_REJECTED: {
-        const newState = action.mediaType === MEDIA_TYPE.AUDIO
-            ? { audioUnmuteApproved: false } : { videoUnmuteApproved: false };
 
         return {
             ...state,
@@ -233,32 +221,6 @@ ReducerRegistry.register('features/av-moderation', (state = initialState, action
                 videoWhitelist: {
                     ...state.videoWhitelist,
                     [id]: true
-                }
-            };
-        }
-
-        return state;
-    }
-
-    case PARTICIPANT_REJECTED: {
-        const { mediaType, id } = action;
-
-        if (mediaType === MEDIA_TYPE.AUDIO) {
-            return {
-                ...state,
-                audioWhitelist: {
-                    ...state.audioWhitelist,
-                    [id]: false
-                }
-            };
-        }
-
-        if (mediaType === MEDIA_TYPE.VIDEO) {
-            return {
-                ...state,
-                videoWhitelist: {
-                    ...state.videoWhitelist,
-                    [id]: false
                 }
             };
         }

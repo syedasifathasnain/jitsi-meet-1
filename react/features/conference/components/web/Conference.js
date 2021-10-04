@@ -11,6 +11,7 @@ import { connect as reactReduxConnect } from '../../../base/redux';
 import { setColorAlpha } from '../../../base/util';
 import { Chat } from '../../../chat';
 import { Filmstrip } from '../../../filmstrip';
+import { SymptomDiseaseRemedy } from '../../../symptomdiseaseremedy'
 import { CalleeInfoContainer } from '../../../invite';
 import { LargeVideo } from '../../../large-video';
 import { KnockingParticipantList, LobbyScreen } from '../../../lobby';
@@ -57,7 +58,8 @@ const FULL_SCREEN_EVENTS = [
 const LAYOUT_CLASSNAMES = {
     [LAYOUTS.HORIZONTAL_FILMSTRIP_VIEW]: 'horizontal-filmstrip',
     [LAYOUTS.TILE_VIEW]: 'tile-view',
-    [LAYOUTS.VERTICAL_FILMSTRIP_VIEW]: 'vertical-filmstrip'
+    [LAYOUTS.VERTICAL_FILMSTRIP_VIEW]: 'vertical-filmstrip',
+    [LAYOUTS.VERTICAL_MODEL_OUTPUT_VIEW]: 'vertical-model-output'
 };
 
 /**
@@ -225,6 +227,9 @@ class Conference extends AbstractConference<Props, *> {
                     onMouseMove = { this._onShowToolbar }
                     ref = { this._setBackground }>
                     <ConferenceInfo />
+                    <table>
+                    <th>fssgfsf</th>
+                </table>
 
                     <Notice />
                     <div id = 'videospace'>
@@ -233,7 +238,9 @@ class Conference extends AbstractConference<Props, *> {
                          && <div id = 'notification-participant-list'>
                              <KnockingParticipantList />
                          </div>}
+                         <SymptomDiseaseRemedy />
                         <Filmstrip />
+                        
                     </div>
 
                     { _showPrejoin || _showLobby || <Toolbox showDominantSpeakerName = { true } /> }
@@ -242,7 +249,7 @@ class Conference extends AbstractConference<Props, *> {
                     { this.renderNotificationsContainer() }
 
                     <CalleeInfoContainer />
-
+                    <CalleeInfoContainer />
                     { _showPrejoin && <Prejoin />}
                     { _showLobby && <LobbyScreen />}
                 </div>

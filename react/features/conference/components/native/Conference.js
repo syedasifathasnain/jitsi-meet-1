@@ -39,6 +39,7 @@ import type { AbstractProps } from '../AbstractConference';
 import LonelyMeetingExperience from './LonelyMeetingExperience';
 import NavigationBar from './NavigationBar';
 import styles from './styles';
+import { Table, TableHead } from '@material-ui/core';
 
 
 /**
@@ -169,6 +170,7 @@ class Conference extends AbstractConference<Props, *> {
 
         return (
             <Container style = { styles.conference }>
+                
                 <StatusBar
                     barStyle = 'light-content'
                     hidden = { _fullscreenEnabled }

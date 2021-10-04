@@ -29,11 +29,6 @@ type Props = {
     _audioMediaState: MediaState,
 
     /**
-     * Whether or not to disable the moderator indicator.
-     */
-    _disableModeratorIndicator: boolean,
-
-    /**
      * The display name of the participant.
      */
     _displayName: string,
@@ -136,7 +131,6 @@ class MeetingParticipantItem extends PureComponent<Props> {
     render() {
         const {
             _audioMediaState,
-            _disableModeratorIndicator,
             _displayName,
             _isModerator,
             _local,
@@ -148,7 +142,6 @@ class MeetingParticipantItem extends PureComponent<Props> {
         return (
             <ParticipantItem
                 audioMediaState = { _audioMediaState }
-                disableModeratorIndicator = { _disableModeratorIndicator }
                 displayName = { _displayName }
                 isKnockingParticipant = { false }
                 isModerator = { _isModerator }
@@ -178,11 +171,9 @@ function mapStateToProps(state, ownProps): Object {
     const _isVideoMuted = isParticipantVideoMuted(participant, state);
     const audioMediaState = getParticipantAudioMediaState(participant, _isAudioMuted, state);
     const videoMediaState = getParticipantVideoMediaState(participant, _isVideoMuted, state);
-    const { disableModeratorIndicator } = state['features/base/config'];
 
     return {
         _audioMediaState: audioMediaState,
-        _disableModeratorIndicator: disableModeratorIndicator,
         _displayName: getParticipantDisplayName(state, participant?.id),
         _isAudioMuted,
         _isFakeParticipant: Boolean(participant?.isFakeParticipant),

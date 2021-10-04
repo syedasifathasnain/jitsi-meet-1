@@ -60,8 +60,7 @@ export function getMovableButtons(width: number): Set<string> {
  */
 export function isToolboxVisible(stateful: Object | Function) {
     const state = toState(stateful);
-    const { toolbarConfig } = state['features/base/config'];
-    const { alwaysVisible } = toolbarConfig || {};
+    const { toolbarConfig: { alwaysVisible } } = state['features/base/config'];
     const { enabled, visible } = state['features/toolbox'];
     const participantCount = getParticipantCountWithFake(state);
     const alwaysVisibleFlag = getFeatureFlag(state, TOOLBOX_ALWAYS_VISIBLE, false);

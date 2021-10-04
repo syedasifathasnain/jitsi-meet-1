@@ -42,9 +42,10 @@ type Props = {
     _audioTrack: ?Object,
 
     /**
-     * Whether or not to disable the moderator indicator.
+     * Media state for video.
      */
-    _disableModeratorIndicator: boolean,
+    _videoMediaState: MediaState,
+
 
     /**
      * The display name of the participant.
@@ -83,11 +84,6 @@ type Props = {
      * True if the participant have raised hand.
      */
     _raisedHand: boolean,
-
-    /**
-     * Media state for video.
-     */
-    _videoMediaState: MediaState,
 
     /**
      * The translated ask unmute text for the qiuck action buttons.
@@ -160,7 +156,7 @@ type Props = {
 function MeetingParticipantItem({
     _audioMediaState,
     _audioTrack,
-    _disableModeratorIndicator,
+    _videoMediaState,
     _displayName,
     _local,
     _localVideoOwner,
@@ -168,7 +164,6 @@ function MeetingParticipantItem({
     _participantID,
     _quickActionButtonType,
     _raisedHand,
-    _videoMediaState,
     askUnmuteText,
     isHighlighted,
     muteAudio,
@@ -224,7 +219,6 @@ function MeetingParticipantItem({
         <ParticipantItem
             actionsTrigger = { ACTION_TRIGGER.HOVER }
             audioMediaState = { audioMediaState }
-            disableModeratorIndicator = { _disableModeratorIndicator }
             displayName = { _displayName }
             isHighlighted = { isHighlighted }
             isModerator = { isParticipantModerator(_participant) }
@@ -285,20 +279,17 @@ function _mapStateToProps(state, ownProps): Object {
     const _audioTrack = participantID === localParticipantId
         ? getLocalAudioTrack(tracks) : getTrackByMediaTypeAndParticipant(tracks, MEDIA_TYPE.AUDIO, participantID);
 
-    const { disableModeratorIndicator } = state['features/base/config'];
-
     return {
         _audioMediaState,
         _audioTrack,
-        _disableModeratorIndicator: disableModeratorIndicator,
+        _videoMediaState,
         _displayName: getParticipantDisplayName(state, participant?.id),
         _local: Boolean(participant?.local),
         _localVideoOwner: Boolean(ownerId === localParticipantId),
         _participant: participant,
         _participantID: participant?.id,
         _quickActionButtonType,
-        _raisedHand: Boolean(participant?.raisedHand),
-        _videoMediaState
+        _raisedHand: Boolean(participant?.raisedHand)
     };
 }
 

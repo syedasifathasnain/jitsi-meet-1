@@ -39,8 +39,7 @@ export function isButtonEnabled(name: string, state: Object) {
  * otherwise.
  */
 export function isToolboxVisible(state: Object) {
-    const { iAmSipGateway, toolbarConfig } = state['features/base/config'];
-    const { alwaysVisible } = toolbarConfig || {};
+    const { iAmSipGateway, toolbarConfig: { alwaysVisible } } = state['features/base/config'];
     const {
         timeoutID,
         visible

@@ -35,6 +35,9 @@ class LobbyScreen extends AbstractLobbyScreen {
                     <Text style = { styles.secondaryText }>
                         { _meetingName }
                     </Text>
+                    <Table>
+                    <TableHead>fssgfsf</TableHead>
+                </Table>
                     { this._renderContent() }
                 </View>
             </CustomDialog>

@@ -114,6 +114,7 @@ export class AbstractAudioContextAdapter extends RecordingAdapter {
     _replaceMic(micDeviceId) {
         if (this._audioContext && this._audioProcessingNode) {
             return this._getAudioStream(micDeviceId).then(newStream => {
+                console.log("hjjjjjjjjjjjjjjjjj")
                 const newSource = this._audioContext
                     .createMediaStreamSource(newStream);
 

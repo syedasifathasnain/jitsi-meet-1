@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 
-import { getParticipantById, PARTICIPANT_ROLE } from '../base/participants';
+import { getLocalParticipant, getParticipantById, PARTICIPANT_ROLE } from '../base/participants';
 import { objectSort } from '../base/util';
 
 /**
@@ -129,6 +129,14 @@ function getEnhancedStatsForOrdering(state, stats, orderConfig) {
 
     for (const id in stats) {
         if (stats[id].hasOwnProperty('_hasLeft') && !stats[id].hasLeft()) {
+            if (orderConfig.includes('name')) {
+                const localParticipant = getLocalParticipant(state);
+
+                if (stats[id].isLocalStats()) {
+                    stats[id].setDisplayName(localParticipant.name);
+                }
+            }
+
             if (orderConfig.includes('role')) {
                 const participant = getParticipantById(state, stats[id].getUserId());
 
